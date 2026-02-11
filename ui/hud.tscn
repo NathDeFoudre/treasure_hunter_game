@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://dceyje2h5uppm"]
+
+[ext_resource type="FontFile" uid="uid://yx54gt5dloje" path="res://assets/fonts/PixelOperator8.ttf" id="1_37p78"]
+[ext_resource type="Script" uid="uid://xi2ttipwuefn" path="res://ui/hud.gd" id="1_64ctp"]
+[ext_resource type="PackedScene" uid="uid://bym86bvojc2um" path="res://ui/pause_page.tscn" id="3_8sq4i"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_64ctp")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 30
+
+[node name="pause" type="Button" parent="MarginContainer"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+action_mode = 0
+text = "PAUSE"
+
+[node name="skor" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("1_37p78")
+theme_override_font_sizes/font_size = 22
+uppercase = true
+
+[node name="pause_page" parent="." instance=ExtResource("3_8sq4i")]
+
+[connection signal="pressed" from="MarginContainer/pause" to="." method="_on_pause_pressed"]
+[connection signal="restart_request" from="pause_page" to="." method="_on_pause_page_restart_request"]
